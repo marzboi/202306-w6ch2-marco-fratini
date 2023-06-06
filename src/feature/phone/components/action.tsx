@@ -1,10 +1,7 @@
-import { useContext } from "react";
-import { PhoneContext } from "../context/phone.context";
+import { usePhone } from "../hooks/use.phone";
 
 export function Action() {
-  const {
-    phoneContext: { handleCall, handleHang, display, calling },
-  } = useContext(PhoneContext);
+  const { handleCall, handleHang, display, calling } = usePhone();
 
   function handleDial() {
     handleCall();

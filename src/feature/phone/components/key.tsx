@@ -1,14 +1,11 @@
-import { useContext } from "react";
-import { PhoneContext } from "../context/phone.context";
+import { usePhone } from "../hooks/use.phone";
 
 type PropsType = {
   item: string;
 };
 
 export function Key({ item }: PropsType) {
-  const {
-    phoneContext: { handleAddNumber, handleDelete, calling },
-  } = useContext(PhoneContext);
+  const { handleAddNumber, handleDelete, calling } = usePhone();
 
   function handleClick() {
     if (!calling) handleAddNumber(item);
