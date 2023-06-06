@@ -2,10 +2,10 @@ import * as ac from "../redux/phone.slice";
 import { useAppDispatch, useAppSelector } from "../../../core/store/hook";
 
 export function usePhone() {
-  const keyValue = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "delete"];
-
   const { phoneNumber, isCalling } = useAppSelector((state) => state.phone);
   const dispatch = useAppDispatch();
+
+  const keyValue = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "delete"];
 
   function handleAddNumber(value: string) {
     if (phoneNumber.length < 9) {

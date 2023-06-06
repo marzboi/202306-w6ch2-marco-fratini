@@ -1,31 +1,24 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Action } from "./action";
-import { ContextStructure, PhoneContext } from "../../context/phone.context";
+import phoneSlice, { toggleCall } from "../redux/phone.slice";
 import "@testing-library/jest-dom/extend-expect";
-
 import { MemoryRouter } from "react-router-dom";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
 describe("Given the Action component", () => {
-  const mockHandleCall = jest.fn();
-  const mockHandleHang = jest.fn();
-
   describe("When display length is 9 and calling is false", () => {
-    const value: ContextStructure = {
-      phoneContext: {
-        handleCall: mockHandleCall,
-        handleHang: mockHandleHang,
-        display: "123456789",
-        calling: false,
-      },
-    } as unknown as ContextStructure;
-
     beforeEach(() => {
+      const mockStore = configureStore({
+        reducer: {
+          phone: phoneSlice,
+        },
+      });
+
       render(
-        <MemoryRouter>
-          <PhoneContext.Provider value={value}>
-            <Action />
-          </PhoneContext.Provider>
-        </MemoryRouter>
+        <Provider store={mockStore}>
+          <Action />
+        </Provider>
       );
     });
 
@@ -33,62 +26,53 @@ describe("Given the Action component", () => {
       const callButton = screen.getByText("Call");
       expect(callButton).toHaveClass("active");
       userEvent.click(callButton);
-      await waitFor(() => expect(mockHandleCall).toHaveBeenCalled());
+      await waitFor(() => expect(phoneSlice).toHaveBeenCalled());
     });
   });
 
   describe("When calling is true", () => {
-    const value: ContextStructure = {
-      phoneContext: {
-        handleCall: mockHandleCall,
-        handleHang: mockHandleHang,
-        display: "",
-        calling: true,
-      },
-    } as unknown as ContextStructure;
-
     beforeEach(() => {
+      const mockStore = configureStore({
+        reducer: {
+          phone: phoneSlice,
+        },
+      });
+
       render(
-        <PhoneContext.Provider value={value}>
+        <Provider store={mockStore}>
           <Action />
-        </PhoneContext.Provider>
+        </Provider>
       );
     });
 
     test("Then the hang up button should be active and on clicking it calls the handleHang function", async () => {
       const hangButton = screen.getByText("Hang Up");
-      expect(hangButton).toHaveClass("active");
+      expect(hangButton).toHaveClass("hang");
       userEvent.click(hangButton);
-      await waitFor(() => expect(mockHandleHang).toHaveBeenCalled());
+      await waitFor(() => expect(toggleCall).toHaveBeenCalled());
     });
   });
 
   describe("When calling is false and display length is not 9", () => {
-    const value = {
-      phoneContext: {
-        handleCall: mockHandleCall,
-        handleHang: mockHandleHang,
-        display: "1234",
-        calling: false,
-        keyValue: 1,
-        handleAddNumber: jest.fn(),
-        handleDelete: jest.fn(),
-      },
-    } as unknown as ContextStructure;
-
     beforeEach(() => {
+      const mockStore = configureStore({
+        reducer: {
+          phone: phoneSlice,
+        },
+      });
+
       render(
         <MemoryRouter>
-          <PhoneContext.Provider value={value}>
+          <Provider store={mockStore}>
             <Action />
-          </PhoneContext.Provider>
+          </Provider>
         </MemoryRouter>
       );
     });
 
     test("Then the call button should not be active", () => {
       const callButton = screen.getByText("Call");
-      expect(callButton).not.toHaveClass("active");
+      expect(callButton).not.toHaveClass("hang");
     });
   });
 });

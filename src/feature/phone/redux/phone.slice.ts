@@ -11,7 +11,7 @@ const initialState: PhoneState = {
 };
 
 const phoneSlice = createSlice({
-  name: "phones",
+  name: "phone",
   initialState,
   reducers: {
     add: (state, { payload }) => ({
