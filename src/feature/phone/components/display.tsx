@@ -1,10 +1,7 @@
-import { useContext } from "react";
-import { PhoneContext } from "../../context/phone.context";
+import { usePhone } from "../hooks/use.phone";
 
 export function Display() {
-  const {
-    phoneContext: { display },
-  } = useContext(PhoneContext);
+  const { display } = usePhone();
 
   return <span className="number">{display}</span>;
 }

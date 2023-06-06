@@ -10,8 +10,8 @@ const initialState: PhoneState = {
   isCalling: false,
 };
 
-const sliceTasks = createSlice({
-  name: "phone",
+const phoneSlice = createSlice({
+  name: "phones",
   initialState,
   reducers: {
     add: (state, { payload }) => ({
@@ -26,5 +26,5 @@ const sliceTasks = createSlice({
   },
 });
 
-export const ac = sliceTasks.actions;
-export default sliceTasks.reducer;
+export const { add, destroyer, toggleCall } = phoneSlice.actions;
+export default phoneSlice.reducer;

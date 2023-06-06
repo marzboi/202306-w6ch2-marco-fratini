@@ -1,41 +1,37 @@
-import { useReducer } from "react";
-import { PhoneState, phoneReducer } from "../../reducer/phone.reducer";
-import * as ac from "../../reducer/phone.actions.creator";
+import * as ac from "../redux/phone.slice";
+import { useAppDispatch, useAppSelector } from "../../../core/store/hook";
 
 export function usePhone() {
-  const initialState: PhoneState = {
-    phoneNumber: "",
-    calling: false,
-  };
-
   const keyValue = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "delete"];
 
-  const [phoneState, dispatch] = useReducer(phoneReducer, initialState);
+  const { phoneNumber, isCalling } = useAppSelector((state) => state.phone);
+  const dispatch = useAppDispatch();
 
   function handleAddNumber(value: string) {
-    if (phoneState.phoneNumber.length < 9) {
-      dispatch(ac.addNumberToDisplayAction(value));
+    if (phoneNumber.length < 9) {
+      dispatch(ac.add(value));
     }
   }
 
   function handleDelete() {
-    dispatch(ac.removeNumberFromDisplayAction());
+    dispatch(ac.destroyer());
   }
 
   function handleCall() {
-    if (phoneState.phoneNumber.length === 9) {
-      dispatch(ac.toggleCallAction());
+    if (phoneNumber.length === 9) {
+      dispatch(ac.toggleCall());
     }
   }
 
   function handleHang() {
-    if (phoneState.calling) {
-      dispatch(ac.toggleCallAction());
+    if (isCalling) {
+      dispatch(ac.toggleCall());
     }
   }
+
   return {
-    display: phoneState.phoneNumber,
-    calling: phoneState.calling,
+    display: phoneNumber,
+    calling: isCalling,
     keyValue,
     handleAddNumber,
     handleDelete,
