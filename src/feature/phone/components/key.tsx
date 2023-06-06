@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { PhoneContext } from "../context/phone.context";
+import { PhoneContext } from "../../context/phone.context";
 
 type PropsType = {
   item: string;

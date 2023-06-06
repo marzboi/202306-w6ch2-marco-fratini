@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Action } from "./action";
-import { ContextStructure, PhoneContext } from "../context/phone.context";
+import { ContextStructure, PhoneContext } from "../../context/phone.context";
 import "@testing-library/jest-dom/extend-expect";
 
 import { MemoryRouter } from "react-router-dom";

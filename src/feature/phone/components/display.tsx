@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { PhoneContext } from "../context/phone.context";
+import { PhoneContext } from "../../context/phone.context";
 
 export function Display() {
   const {

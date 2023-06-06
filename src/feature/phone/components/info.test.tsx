@@ -1,7 +1,7 @@
 import { Info } from "./info";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { ContextStructure, PhoneContext } from "../context/phone.context";
+import { ContextStructure, PhoneContext } from "../../context/phone.context";
 
 describe("Given the Info component", () => {
   describe("When calling is false", () => {

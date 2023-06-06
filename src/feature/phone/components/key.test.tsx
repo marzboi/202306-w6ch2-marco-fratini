@@ -1,7 +1,7 @@
 import { Key } from "./key";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { ContextStructure, PhoneContext } from "../context/phone.context";
+import { ContextStructure, PhoneContext } from "../../context/phone.context";
 import userEvent from "@testing-library/user-event";
 
 describe("Given the Key component", () => {

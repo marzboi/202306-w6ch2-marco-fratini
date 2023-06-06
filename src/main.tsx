@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./App";
+import { App } from "./core/component/App";
 import { PhoneContextProvider } from "./context/phone.context.provider";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./styles.css";

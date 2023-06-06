@@ -1,7 +1,7 @@
 import { Keyboard } from "./keyboard";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { ContextStructure, PhoneContext } from "../context/phone.context";
+import { ContextStructure, PhoneContext } from "../../context/phone.context";
 
 describe("Given the Keyboard component", () => {
   const mockKeyValue = [
