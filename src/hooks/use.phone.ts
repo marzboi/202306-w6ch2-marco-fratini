@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import { PhoneState, phoneReducer } from "../reducer/phone.reducer";
 import * as ac from "../reducer/phone.actions.creator";
 
@@ -22,14 +22,9 @@ export function usePhone() {
     dispatch(ac.removeNumberFromDisplayAction());
   }
 
-  let timeout: NodeJS.Timeout;
-
   function handleCall() {
     if (phoneState.phoneNumber.length === 9) {
       dispatch(ac.toggleCallAction());
-      timeout = setTimeout(() => {
-        dispatch(ac.toggleCallAction());
-      }, 5000);
     }
   }
 
@@ -38,17 +33,6 @@ export function usePhone() {
       dispatch(ac.toggleCallAction());
     }
   }
-
-  useEffect(() => {
-    if (!phoneState.calling) {
-      if (phoneState.calling) {
-        setTimeout(() => {
-          dispatch(ac.toggleCallAction());
-        }, 2000);
-      }
-    }
-  }, [phoneState.calling]);
-
   return {
     display: phoneState.phoneNumber,
     calling: phoneState.calling,
