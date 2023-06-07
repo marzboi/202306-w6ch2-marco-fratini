@@ -9,12 +9,12 @@ export function usePhone() {
 
   function handleAddNumber(value: string) {
     if (phoneNumber.length < 9) {
-      dispatch(ac.add(value));
+      dispatch(ac.addNumberToDisplay(value));
     }
   }
 
   function handleDelete() {
-    dispatch(ac.destroyer());
+    dispatch(ac.destroyNumberToDisplay());
   }
 
   let timer: NodeJS.Timeout;
