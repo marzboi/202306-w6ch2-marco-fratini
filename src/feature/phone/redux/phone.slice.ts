@@ -14,11 +14,11 @@ const phoneSlice = createSlice({
   name: "phone",
   initialState,
   reducers: {
-    add: (state, { payload }) => ({
+    addNumberToDisplay: (state, { payload }) => ({
       ...state,
       phoneNumber: state.phoneNumber + payload,
     }),
-    destroyer: (state) => ({
+    destroyNumberToDisplay: (state) => ({
       ...state,
       phoneNumber: state.phoneNumber.substring(0, state.phoneNumber.length - 1),
     }),
@@ -26,5 +26,6 @@ const phoneSlice = createSlice({
   },
 });
 
-export const { add, destroyer, toggleCall } = phoneSlice.actions;
+export const { addNumberToDisplay, destroyNumberToDisplay, toggleCall } =
+  phoneSlice.actions;
 export default phoneSlice.reducer;

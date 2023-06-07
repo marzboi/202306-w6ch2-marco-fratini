@@ -9,23 +9,29 @@ export function usePhone() {
 
   function handleAddNumber(value: string) {
     if (phoneNumber.length < 9) {
-      dispatch(ac.add(value));
+      dispatch(ac.addNumberToDisplay(value));
     }
   }
 
   function handleDelete() {
-    dispatch(ac.destroyer());
+    dispatch(ac.destroyNumberToDisplay());
+  }
+
+  let timer: NodeJS.Timeout;
+
+  function handleHang() {
+    if (isCalling) {
+      dispatch(ac.toggleCall());
+      clearTimeout(timer);
+    }
   }
 
   function handleCall() {
     if (phoneNumber.length === 9) {
       dispatch(ac.toggleCall());
-    }
-  }
-
-  function handleHang() {
-    if (isCalling) {
-      dispatch(ac.toggleCall());
+      timer = setTimeout(() => {
+        dispatch(ac.toggleCall());
+      }, 5000);
     }
   }
 
