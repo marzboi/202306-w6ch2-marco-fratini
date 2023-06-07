@@ -17,15 +17,21 @@ export function usePhone() {
     dispatch(ac.destroyer());
   }
 
-  function handleCall() {
-    if (phoneNumber.length === 9) {
-      dispatch(ac.toggleCall());
-    }
-  }
+  let timer: NodeJS.Timeout;
 
   function handleHang() {
     if (isCalling) {
       dispatch(ac.toggleCall());
+      clearTimeout(timer);
+    }
+  }
+
+  function handleCall() {
+    if (phoneNumber.length === 9) {
+      dispatch(ac.toggleCall());
+      timer = setTimeout(() => {
+        dispatch(ac.toggleCall());
+      }, 5000);
     }
   }
 
